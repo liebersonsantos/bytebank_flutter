@@ -1,3 +1,4 @@
+import 'package:bytebank/Editor.dart';
 import 'package:bytebank/Transfer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,32 +16,21 @@ class TransferForm extends StatelessWidget {
         appBar: AppBar(title: Text('Criando Tranferência')),
         body: Column(
           children: [
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-              child: TextField(
-                controller: _controllerValue,
-                style: TextStyle(fontSize: 24),
-                decoration: InputDecoration(
-                  icon: Icon(Icons.monetization_on),
-                  labelText: 'Valor',
-                  hintText: '0.0',
-                ),
-                keyboardType: TextInputType.number,
-              ),
-            ),
+            Editor(controller: _controllerAccountNumber, label: 'Número da conta', hint: '0000'),
+            Editor(controller: _controllerValue, label: 'Valor', hint: '0.0', icon: Icons.monetization_on),
             RaisedButton(
                 child: Text('Confirmar'),
-                onPressed: () {
-                  accountNumber = int.tryParse(_controllerAccountNumber.text);
-                  value = double.tryParse(_controllerValue.text);
-
-                  if(accountNumber != null && value != null){
-                    final transfer = Transfer(value, accountNumber);
-                    debugPrint('$transfer');
-                  }
-                })
+                onPressed: () => _createTransfer())
           ],
         ));
+  }
+
+  void _createTransfer() {
+     accountNumber = int.tryParse(_controllerAccountNumber.text);
+    value = double.tryParse(_controllerValue.text);
+
+    if(accountNumber != null && value != null){
+      final transfer = Transfer(value, accountNumber);
+    }
   }
 }

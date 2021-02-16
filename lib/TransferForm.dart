@@ -15,7 +15,7 @@ class TransferForm extends StatelessWidget {
         appBar: AppBar(title: Text('Criando Tranferência')),
         body: Column(
           children: [
-           
+
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
               child: TextField(

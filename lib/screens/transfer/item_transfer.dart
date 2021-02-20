@@ -1,4 +1,4 @@
-import 'package:bytebank/Transfer.dart';
+import 'package:bytebank/model/transfer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

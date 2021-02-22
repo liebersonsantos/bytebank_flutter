@@ -1,6 +1,9 @@
 import 'package:bytebank/components/editor.dart';
+import 'package:bytebank/model/balance.dart';
+import 'package:bytebank/model/tranfers.dart';
 import 'package:bytebank/model/transfer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 const _appBarTitle = 'Criando Transferência';
 const _labelAccountNumber = 'Número da conta';
@@ -9,14 +12,7 @@ const _labelValue = 'Valor';
 const _hintValue = '0.00';
 const _confirm = 'Confirmar';
 
-class TransferForm extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return TransferFormState();
-  }
-}
-
-class TransferFormState extends State<TransferForm> {
+class TransferForm extends StatelessWidget {
   final TextEditingController _controllerAccountNumber =
       TextEditingController();
   final TextEditingController _controllerValue = TextEditingController();
@@ -51,9 +47,20 @@ class TransferFormState extends State<TransferForm> {
     accountNumber = int.tryParse(_controllerAccountNumber.text);
     value = double.tryParse(_controllerValue.text);
 
-    if (accountNumber != null && value != null) {
-      final transfer = Transfer(value, accountNumber);
-      Navigator.pop(context, transfer);
+    if (_validateTransfer(accountNumber, value)) {
+      final newTransfer = Transfer(value, accountNumber);
+      _updateState(context, newTransfer, value);
+      Navigator.pop(context);
     }
+  }
+
+  _validateTransfer(accountNumber, value) {
+    final filledFields = accountNumber != null && value != null;
+    return filledFields;
+  }
+
+  _updateState(context, newTransfer, value){
+    Provider.of<Transfers>(context, listen: false).addTransferList(newTransfer);
+    Provider.of<Balance>(context, listen: false).subtractValue(value);
   }
 }

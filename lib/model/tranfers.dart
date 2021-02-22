@@ -8,6 +8,6 @@ class Transfers extends ChangeNotifier{
 
   addTransferList(Transfer transfer){
     transfers.add(transfer);
-    notifyListeners()
+    notifyListeners();
   }
 }

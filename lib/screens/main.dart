@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    builder: (context) => Balance(10),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(builder: (context) => Balance(0))
+    ],
     child: ByteBankApp(),
   ));
   // runApp(ByteBankApp());

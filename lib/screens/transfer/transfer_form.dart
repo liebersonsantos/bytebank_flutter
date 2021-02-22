@@ -25,8 +25,7 @@ class TransferFormState extends State<TransferForm> {
   double value;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: Text(_appBarTitle)),
         body: SingleChildScrollView(
           child: Column(
@@ -45,8 +44,8 @@ class TransferFormState extends State<TransferForm> {
                   onPressed: () => _createTransfer(context)),
             ],
           ),
-        ));
-  }
+        ),
+      );
 
   void _createTransfer(BuildContext context) {
     accountNumber = int.tryParse(_controllerAccountNumber.text);

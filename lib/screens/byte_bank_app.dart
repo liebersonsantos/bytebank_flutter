@@ -1,3 +1,4 @@
+import 'package:bytebank/screens/dashboard/dashboard.dart';
 import 'package:bytebank/screens/transfer/column_transfer_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,8 @@ class ByteBankApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary
         )
       ),
-      home: ColumnTransferList()
+      // home: ColumnTransferList()
+      home: Dashboard()
     );
   }
 }

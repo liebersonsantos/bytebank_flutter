@@ -47,16 +47,18 @@ class TransferForm extends StatelessWidget {
     accountNumber = int.tryParse(_controllerAccountNumber.text);
     value = double.tryParse(_controllerValue.text);
 
-    if (_validateTransfer(accountNumber, value)) {
+    if (_validateTransfer(context, accountNumber, value)) {
       final newTransfer = Transfer(value, accountNumber);
       _updateState(context, newTransfer, value);
       Navigator.pop(context);
     }
   }
 
-  _validateTransfer(accountNumber, value) {
-    final filledFields = accountNumber != null && value != null;
-    return filledFields;
+  _validateTransfer(context, accountNumber, value) {
+    final _filledFields = accountNumber != null && value != null;
+    final _enoughBalance = value <= Provider.of<Balance>(context, listen: false).value;
+
+    return _filledFields && _enoughBalance;
   }
 
   _updateState(context, newTransfer, value){
